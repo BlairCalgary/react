@@ -1,6 +1,6 @@
 
 const functions = {
-    
+
     size: (num) => {
         if (num < 10) return "small";
         if (num < 20) return "medium";
@@ -14,9 +14,12 @@ const functions = {
 
     subtract: (num1, num2) => {
         return num1 - num2;
+    },
+
+    isEven: (num1) => {
+        return (num1%2===0) ? true : false;
     }
 
-    
 };
 
 export default functions;
