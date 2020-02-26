@@ -18,8 +18,7 @@ const functions = {
 
     isEven: (num1) => {
         return (num1%2===0) ? true : false;
-    }
-
+    },
 };
 
 export default functions;

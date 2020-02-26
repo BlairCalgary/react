@@ -21,3 +21,4 @@ test('Is the number even?', () => {
     expect(functions.isEven(-1)).toBe(false);
     expect(functions.isEven(-2)).toBe(true);
 });
+

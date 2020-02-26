@@ -1,4 +1,5 @@
 import functions from './functions.js';
+import syntax from './syntax.js';
 
 // **********
 //
