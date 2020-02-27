@@ -65,6 +65,37 @@ html {
     width: 50px;
 }
 
+.container {
+    background-color: #E0FFFF;
+    border-radius: 10px;
+    border: 2px solid #003366;
+    cursor: pointer;
+}
+
+.operators {
+    display: inline-grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    justify-items: center stretch;
+    align-items: stretch;
+}
+.calc-cadet-grey {
+    width: 35px;
+    height: 35px;
+    background-color: #91a3b0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: black;
+    border: 2px solid #003366;
+    border-radius: 10px;
+    margin: 10px;
+}
+#answer {
+    height: 25px;
+    width: 10em;
+    border: 1px solid grey;
+    margin: auto;
+}
 
 /* Turn off parallax scrolling for tablets and phones */
 

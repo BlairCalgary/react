@@ -16,6 +16,19 @@ const functions = {
         return num1 - num2;
     },
 
+    multiply: (num1, num2) => {
+        return num1 * num2;
+    },
+
+    divide: (num1, num2) => {
+        return num1 / num2;
+    },
+
+    getValues: () => {
+        return [Number(document.getElementById("var1").value),Number(document.getElementById("var2").value)];
+    
+    },
+
     isEven: (num1) => {
         return (num1%2===0) ? true : false;
     },

@@ -22,3 +22,28 @@ test('Is the number even?', () => {
     expect(functions.isEven(-2)).toBe(true);
 });
 
+test('Does the substract function work?', () => {
+    expect(functions.subtract(1,2)).toBe(-1);
+    expect(functions.subtract(70,27)).toBe(43);
+});
+
+test('Does the multiply function work?', () => {
+    expect(functions.multiply(4,5)).toBe(20);
+    expect(functions.multiply(2,7)).toBe(14);
+});
+
+test('Does the divide function work?', () => {
+    expect(functions.divide(30,10)).toBe(3);
+    expect(functions.divide(27,3)).toBe(9);
+});
+
+test('Does get values work?', () => {
+    document.body.innerHTML =
+    '<div>' +
+        '<input id="var1" type="number" value="2">' +
+        '<input id="var2" type="number" value="3">' +
+    '</div>';
+
+    expect(functions.getValues()).toStrictEqual([2,3]);
+});
+
