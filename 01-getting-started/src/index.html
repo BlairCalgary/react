@@ -101,8 +101,8 @@
         <h1>My Calculator</h1>
         <div class="container">
             <div id="calcTitle">My Calculator</div>
-            <div>
-                <input id="var1" type="number" value="2">
+            <div id="values">
+                <input id="var1" class="variable" type="number" value="2">
             </div>
             <div class="operators">
                 <div id="add" class="calcborder calc-cadet-grey clickable">+</div>
@@ -110,15 +110,40 @@
                 <div id="divide" class="calcborder calc-cadet-grey clickable">÷</div>
                 <div id="multiply" class="calcborder calc-cadet-grey clickable">×</div>
             </div>
-            <div>
-                <input id="var2" type="number" value="3">
+            <div id="values">
+                <input id="var2" class="variable" type="number" value="3">
             </div>
             <div id="answer" class="calcborder">answer</div>
             
         </div>
     </div>
 
-
+    <!-- ---------- Canadian Taxes ------------------ -->
+    <div class="w3-content w3-container w3-padding-64">
+        <h1>Canadian Taxes</h1>
+        <div class="taxescalc">
+            <ul class="earningsdiv">
+                <li class="blueback">Earnings</li>
+                <li><input id="earnings" type="number"></li>
+            </ul><br>
+            <button id="calculate">Calculate</button><br>
+            <ul class="earningsdiv">
+                <li class="blueback">Taxes</p>
+                <li id="taxes">output</li>
+            </ul><br>
+            <div class="rates">
+            <h4>Rates</h4>
+                <p>
+                    15% • first $48,535<br>
+                    20.5% • $48,535 to $97,069<br>
+                    26% • $97,069 to $150,473<br>
+                    29% • $150-473 to $214,368<br>
+                    33% • over $214,368
+                </p>
+            </div>
+                    
+        </div>
+    </div>
     <!-- Footer -->
     <footer class="w3-center w3-black w3-padding-64 w3-opacity w3-hover-opacity-off">
         <a href="#home" class="w3-button w3-light-grey"><i class="fa fa-arrow-up w3-margin-right"></i>To the top</a>

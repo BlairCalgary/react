@@ -26,7 +26,6 @@ const functions = {
 
     getValues: () => {
         return [Number(document.getElementById("var1").value),Number(document.getElementById("var2").value)];
-    
     },
 
     isEven: (num1) => {

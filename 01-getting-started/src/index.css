@@ -66,10 +66,14 @@ html {
 }
 
 .container {
+    width: 25vw;
+    min-width: 280px;
     background-color: #E0FFFF;
     border-radius: 10px;
     border: 2px solid #003366;
     cursor: pointer;
+    margin: auto;
+    
 }
 
 .operators {
@@ -86,15 +90,72 @@ html {
     justify-content: center;
     align-items: center;
     color: black;
-    border: 2px solid #003366;
+    /* border: 2px solid #003366; */
     border-radius: 10px;
     margin: 10px;
 }
-#answer {
-    height: 25px;
-    width: 10em;
-    border: 1px solid grey;
+.taxescalc {
+    width: 50vw;
+    min-width: 350px;
+    background-color: gainsboro;
+}
+.earningsdiv {
+    display: inline-flex;
+    list-style-type: none;
+}
+.rates {
+    margin: 1em;
+    font-size: 80%;
+}    
+
+.blueback {
+    background-color: lightskyblue;
+    color: black;
+    margin-left: 0.5em;
+    height: 2em;
+    border-right: 2px solid;
+    border-bottom: 2px solid;
+    padding: 5px;
+}
+
+#taxes {
+    width: 5em;
+    background-color: aliceblue;
+    display: flex;
+    align-items: flex-end;
+}
+#calculate {
+    border:none;
+    margin-left: 8em;
+    background-color: pink;
+    border-right: 2px solid;
+    border-bottom: 2px solid;
+}
+#values {
+    background-color: pink;
+    padding: 10px;
+    width: 80%;
     margin: auto;
+    border-radius: 10px;
+}
+
+.variable {
+    background-color: pink;
+    border: none;
+}
+
+
+#answer {
+    color: black;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 35px;
+    margin: 10px auto;
+    background-color: deepskyblue;
+    /* padding: 10px; */
+    width: 80%;
+    border-radius: 10px;
 }
 
 /* Turn off parallax scrolling for tablets and phones */
