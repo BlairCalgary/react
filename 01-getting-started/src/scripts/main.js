@@ -26,3 +26,11 @@ divide.addEventListener('click', (() => {
     var [value1, value2] = functions.getValues();
     answer.textContent = functions.divide(value1, value2);
 }));
+divide.addEventListener('click', (() => {
+    var [value1, value2] = functions.getValues();
+    answer.textContent = functions.divide(value1, value2);
+}));
+calculate.addEventListener('click', (() => {
+    let value1 = functions.earningsBrackets(earnings.value);
+    taxes.textContent = functions.bracketTaxes(value1);
+}));

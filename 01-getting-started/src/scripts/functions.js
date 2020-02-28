@@ -33,30 +33,27 @@ const functions = {
     },
 
     earningsBrackets: (num1) => {
-        var aBracket = 0, bBracket = 0, cBracket = 0, dBracket = 0, eBracket = 0;
-        if (num1 > 214368) {
-            eBracket = num1 - 214368;
-            num1 = 214368;
+        let brackets = [0,0,0,0,0],
+            taxLevels = [214368,150473,97069,48535,0],
+            index;
+        for (index = 0; index < brackets.length; ++index) {
+            if (num1 > taxLevels[index]) {
+                brackets[index] = num1 - taxLevels[index];
+                num1 = taxLevels[index];
+            }           
+        };
+        return(brackets);
+    },
+    bracketTaxes: (num1) => {
+        let taxRates = [.33,.29,.26,.205,.15],
+            taxes = 0,
+            index;
+        for (index = 0; index < taxRates.length; ++index) {
+            taxes+=num1[index]*taxRates[index];
         }
-        if (num1 > 150473) {
-            dBracket = num1 - 150473;
-            num1 = 150473;
-        }
-        if (num1 > 97069) {
-            cBracket = num1 - 97069;
-            num1 = 97069;
-        }
-        if (num1 > 48535) {
-            bBracket = num1 - 48535;
-            num1 = 48535;
-        }
-        aBracket = Math.round((num1 * .15 + Number.EPSILON) * 100) / 100;
-        bBracket = Math.round((bBracket * .205 + Number.EPSILON) * 100) / 100;
-        cBracket = Math.round((cBracket * .26 + Number.EPSILON) * 100) / 100;
-        dBracket = Math.round((dBracket * .29 + Number.EPSILON) * 100) / 100;
-        eBracket = Math.round((eBracket * .33 + Number.EPSILON) * 100) / 100;
-        return [aBracket,bBracket,cBracket,dBracket,eBracket];
+        return taxes.toFixed(2);
     }
+
 };
 
 export default functions;

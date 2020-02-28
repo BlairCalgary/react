@@ -48,6 +48,11 @@ test('Does get values work?', () => {
 });
 
 test('Does earningsBrackets work?', () => {
-    expect(functions.earningsBrackets(100000)).toStrictEqual([7280.25,9949.47,762.06,0,0]);
-    expect(functions.earningsBrackets(220000)).toStrictEqual([7280.25,9949.47,13885.04,18529.55,1858.56]);
+    expect(functions.earningsBrackets(100000)).toStrictEqual([0,0,2931,48534,48535]);
+    expect(functions.earningsBrackets(220000)).toStrictEqual([5632,63895,53404,48534,48535]);
+});
+
+test('Does bracketTaxes work?', () => {
+    expect(functions.bracketTaxes([0,0,2931,48534,48535])).toBe(17991.78);
+    expect(functions.bracketTaxes([5632,63895,53404,48534,48535])).toBe(51502.87);
 })
