@@ -33,6 +33,7 @@ divide.addEventListener('click', (() => {
 calculate.addEventListener('click', (() => {
     let value1 = functions.earningsBrackets(earnings.value);
     taxes.textContent = functions.bracketTaxes(value1);
+    effectiveTaxRate.textContent = (taxes.textContent/earnings.value*100).toFixed(2)+'%';
 }));
 let myArray = [];
 addArray.addEventListener('click', (() => {

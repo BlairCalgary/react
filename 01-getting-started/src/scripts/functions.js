@@ -54,18 +54,18 @@ const functions = {
         }
         return Number(taxes.toFixed(2));
     },
-    calcTaxes: (num1) => {
-        let brackets = [0,0,0,0,0],
-            taxLevels = [214368,150473,97069,48535,0],
-            index;
-        for (index = 0; index < brackets.length; ++index) {
-            if (num1 > taxLevels[index]) {
-                brackets[index] = num1 - taxLevels[index];
-                num1 = taxLevels[index];
-            }           
-        };
-        return(brackets);
-    },
+    // calcTaxes: (num1) => {
+    //     let brackets = [0,0,0,0,0],
+    //         taxLevels = [214368,150473,97069,48535,0],
+    //         index;
+    //     for (index = 0; index < brackets.length; ++index) {
+    //         if (num1 > taxLevels[index]) {
+    //             brackets[index] = num1 - taxLevels[index];
+    //             num1 = taxLevels[index];
+    //         }           
+    //     };
+    //     return(brackets);
+    // },
     addNumToArray: (myArray, num1) => {
         myArray.push(num1);
         return myArray;

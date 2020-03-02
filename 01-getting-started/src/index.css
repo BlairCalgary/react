@@ -118,8 +118,8 @@ html {
     padding: 5px;
 }
 
-#taxes {
-    width: 5em;
+.outputdisplay {
+    width: 10em;
     background-color: aliceblue;
     display: flex;
     align-items: flex-end;
