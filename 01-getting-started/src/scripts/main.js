@@ -1,5 +1,5 @@
 import functions from './functions.js';
-
+import provinces from './provinces.js';
 
 // **********
 //
@@ -52,4 +52,4 @@ totalArray.addEventListener('click', (() => {
 clearArray.addEventListener('click', (() => {
     myArray = [];
     arraysoutput.textContent=`Array cleared.`;
-}))
+}));

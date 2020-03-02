@@ -70,4 +70,9 @@ test('total array?', () => {
 test('does clear array work?', () => {
     expect(functions.clearArray([1,2,3])).toStrictEqual([]);
     expect(functions.clearArray([9,8,7])).toStrictEqual([]);
-})
+});
+test('province lookup?', () => {
+    expect(functions.lookupProv('AB')).toBe('Alberta');
+    expect(functions.lookupProv('NT')).toBe('Northwest Territories');
+    expect(functions.lookupProv('ZZ')).toBe('Not a valid province code.');
+});

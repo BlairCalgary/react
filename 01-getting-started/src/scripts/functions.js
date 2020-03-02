@@ -1,3 +1,4 @@
+import provinces from './provinces.js'
 
 const functions = {
 
@@ -51,13 +52,11 @@ const functions = {
         for (index = 0; index < taxRates.length; ++index) {
             taxes+=num1[index]*taxRates[index];
         }
-        return taxes.toFixed(2);
+        return Number(taxes.toFixed(2));
     },
     calcTaxes: (num1) => {
         let brackets = [0,0,0,0,0],
             taxLevels = [214368,150473,97069,48535,0],
-            taxRates = [.33,.29,.26,.205,.15],
-            taxes = 0,
             index;
         for (index = 0; index < brackets.length; ++index) {
             if (num1 > taxLevels[index]) {
@@ -66,15 +65,6 @@ const functions = {
             }           
         };
         return(brackets);
-    },
-    bracketTaxes: (num1) => {
-        let taxRates = [.33,.29,.26,.205,.15],
-            taxes = 0,
-            index;
-        for (index = 0; index < taxRates.length; ++index) {
-            taxes+=num1[index]*taxRates[index];
-        }
-        return Number(taxes.toFixed(2));
     },
     addNumToArray: (myArray, num1) => {
         myArray.push(num1);
@@ -87,6 +77,9 @@ const functions = {
     clearArray: (myArray) => {
         myArray = [];
         return myArray;
+    },
+    lookupProv: (prov) => {
+        return (provinces[prov]===undefined) ? 'Not a valid province code.' : provinces[prov];
     }
 };
 
