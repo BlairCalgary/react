@@ -54,3 +54,6 @@ clearArray.addEventListener('click', (() => {
     myArray = [];
     arraysoutput.textContent=`Array cleared.`;
 }));
+dictLookup.addEventListener('click', (() => {
+    msgarea.textContent=functions.lookupProv(dictinput.value);
+}))

@@ -79,7 +79,7 @@ const functions = {
         return myArray;
     },
     lookupProv: (prov) => {
-        return (provinces[prov]===undefined) ? 'Not a valid province code.' : provinces[prov];
+        return (provinces[prov.toUpperCase()]===undefined) ? 'Not a valid province code.' : provinces[prov.toUpperCase()];
     }
 };
 
