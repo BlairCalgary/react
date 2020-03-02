@@ -158,6 +158,22 @@ html {
     border-radius: 10px;
 }
 
+#workingwitharrays {
+    border: 2px solid black;
+    margin: auto;
+    width: 30vw;
+    color: black;
+}
+
+#buttondiv {
+    margin: 1em;
+}
+.buttonclass {
+    padding: 0.5em;
+    border-radius: 0.5em;
+    background-color: gold;
+}
+
 /* Turn off parallax scrolling for tablets and phones */
 
 @media only screen and (min-device-width: 1600px) {

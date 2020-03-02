@@ -52,8 +52,42 @@ const functions = {
             taxes+=num1[index]*taxRates[index];
         }
         return taxes.toFixed(2);
+    },
+    calcTaxes: (num1) => {
+        let brackets = [0,0,0,0,0],
+            taxLevels = [214368,150473,97069,48535,0],
+            taxRates = [.33,.29,.26,.205,.15],
+            taxes = 0,
+            index;
+        for (index = 0; index < brackets.length; ++index) {
+            if (num1 > taxLevels[index]) {
+                brackets[index] = num1 - taxLevels[index];
+                num1 = taxLevels[index];
+            }           
+        };
+        return(brackets);
+    },
+    bracketTaxes: (num1) => {
+        let taxRates = [.33,.29,.26,.205,.15],
+            taxes = 0,
+            index;
+        for (index = 0; index < taxRates.length; ++index) {
+            taxes+=num1[index]*taxRates[index];
+        }
+        return Number(taxes.toFixed(2));
+    },
+    addNumToArray: (myArray, num1) => {
+        myArray.push(num1);
+        return myArray;
+    },
+    totalArray: (myArray) => {
+        let myTotal = myArray.reduce((acc,val) => acc+val,0);
+        return myTotal;
+    },
+    clearArray: (myArray) => {
+        myArray = [];
+        return myArray;
     }
-
 };
 
 export default functions;

@@ -55,4 +55,19 @@ test('Does earningsBrackets work?', () => {
 test('Does bracketTaxes work?', () => {
     expect(functions.bracketTaxes([0,0,2931,48534,48535])).toBe(17991.78);
     expect(functions.bracketTaxes([5632,63895,53404,48534,48535])).toBe(51502.87);
+});
+
+
+// <--- Working With Arrays Exercise Starts Here --->
+test('add number to array?', () => {
+    expect(functions.addNumToArray([0,1],2)).toStrictEqual([0,1,2]);
+    expect(functions.addNumToArray([9,8],7)).toStrictEqual([9,8,7]);
+});
+test('total array?', () => {
+    expect(functions.totalArray([2,3,4])).toBe(9);
+    expect(functions.totalArray([10,20,30])).toBe(60);
+});
+test('does clear array work?', () => {
+    expect(functions.clearArray([1,2,3])).toStrictEqual([]);
+    expect(functions.clearArray([9,8,7])).toStrictEqual([]);
 })

@@ -34,3 +34,22 @@ calculate.addEventListener('click', (() => {
     let value1 = functions.earningsBrackets(earnings.value);
     taxes.textContent = functions.bracketTaxes(value1);
 }));
+let myArray = [];
+addArray.addEventListener('click', (() => {
+    if (isNaN(Number(arraysinput.value))||arraysinput.value==="") {
+        arraysoutput.textContent = "Input is not a number.";
+    } else {
+        myArray = functions.addNumToArray(myArray,Number(arraysinput.value));
+        arraysoutput.textContent = "Number added to array.";
+    }
+}));
+showArray.addEventListener('click', (() => {
+    arraysoutput.textContent=myArray;
+}));
+totalArray.addEventListener('click', (() => {
+    arraysoutput.textContent=functions.totalArray(myArray);
+}));
+clearArray.addEventListener('click', (() => {
+    myArray = [];
+    arraysoutput.textContent=`Array cleared.`;
+}))
