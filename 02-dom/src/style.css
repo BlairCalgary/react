@@ -13,7 +13,7 @@
 
 #cards {
     display: inline-grid;
-    grid-template-rows: 1fr 1fr;
+    grid-template-rows: 50% 50%;
 }
 
 .panels {
@@ -23,10 +23,18 @@
 }
 
 #leftPanel {
+    justify-self: center;
     grid-area: 1 / 1 / 2 / 2;
+    display: flex;
 }
 
+#addCard {
+    /* justify-self: center stretch; */
+    margin: auto;
+}
 
 #rightPanel {
     grid-area: 1 / 2 / 2 / 3;
 }
+
+
