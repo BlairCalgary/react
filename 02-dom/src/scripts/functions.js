@@ -18,6 +18,18 @@ const functions = {
         var parent = document.getElementById('myOL');
         var child = document.getElementById('myOL').lastElementChild;
         parent.removeChild(child);
+    },
+    deleteCard: (parent, node) => {
+        parent.removeChild(node);
+    },
+    addBefore: (parent, node, target) => {
+        parent.insertBefore(node, target);
+    },
+    addAfter: (parent, node, target) => {
+        parent.insertBefore(node, target.nextSibling);
+    },
+    addCard: (parent, node) => {
+        parent.appendChild(node);
     }
 };
 

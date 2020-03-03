@@ -11,8 +11,8 @@
     margin: 1em;
 }
 
-#cards {
-    display: inline-grid;
+#cardsContainer {
+    display: grid;
     grid-template-rows: 50% 50%;
 }
 
@@ -23,16 +23,25 @@
 }
 
 #leftPanel {
-    justify-self: center;
     grid-area: 1 / 1 / 2 / 2;
-    display: flex;
+    display: inline-flex;
+    flex-direction: column;
+    /* justify-self: center; */
 }
 
 #addCard {
     /* justify-self: center stretch; */
     margin: auto;
 }
+.cards {
+    text-align: center;
+    margin: 0.5em auto;
+    border: 2px solid black;
+}
 
+#cardTitle {
+    margin: auto;
+}
 #rightPanel {
     grid-area: 1 / 2 / 2 / 3;
 }
