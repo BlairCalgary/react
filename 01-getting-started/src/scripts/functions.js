@@ -1,4 +1,4 @@
-
+import provinces from './provinces.js';
 const functions = {
 
     size: (num) => {
@@ -33,28 +33,22 @@ const functions = {
         return (num1%2===0) ? true : false;
     },
 
-    earningsBrackets: (num1) => {
-        let brackets = [0,0,0,0,0],
+    fedTaxes: (num1) => {
+        var brackets = [0,0,0,0,0],
             taxLevels = [214368,150473,97069,48535,0],
-            index;
+            taxRates = [.33,.29,.26,.205,.15],
+            index,
+            taxes = 0;
         for (index = 0; index < brackets.length; ++index) {
             if (num1 > taxLevels[index]) {
                 brackets[index] = num1 - taxLevels[index];
                 num1 = taxLevels[index];
+                taxes=taxes+brackets[index]*taxRates[index];
             }           
         };
-        return(brackets);
+         return Math.round((taxes + Number.EPSILON) * 100) / 100;
+
     },
-    bracketTaxes: (num1) => {
-        let taxRates = [.33,.29,.26,.205,.15],
-            taxes = 0,
-            index;
-        for (index = 0; index < taxRates.length; ++index) {
-            taxes+=num1[index]*taxRates[index];
-        }
-        return Number(taxes.toFixed(2));
-    },
- 
     addNumToArray: (myArray, num1) => {
         myArray.push(num1);
         return myArray;

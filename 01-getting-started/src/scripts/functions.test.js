@@ -47,14 +47,12 @@ test('Does get values work?', () => {
     expect(functions.getValues()).toStrictEqual([2,3]);
 });
 
-test('Does earningsBrackets work?', () => {
-    expect(functions.earningsBrackets(100000)).toStrictEqual([0,0,2931,48534,48535]);
-    expect(functions.earningsBrackets(220000)).toStrictEqual([5632,63895,53404,48534,48535]);
-});
-
-test('Does bracketTaxes work?', () => {
-    expect(functions.bracketTaxes([0,0,2931,48534,48535])).toBe(17991.78);
-    expect(functions.bracketTaxes([5632,63895,53404,48534,48535])).toBe(51502.87);
+test('Does fedTaxes work?', () => {
+    expect(functions.fedTaxes(50000)).toBe(7580.58);
+    expect(functions.fedTaxes(75000)).toBe(12705.58);
+    expect(functions.fedTaxes(100000)).toBe(17991.78);
+    expect(functions.fedTaxes(220000)).toBe(51502.87);
+    
 });
 
 
