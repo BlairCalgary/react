@@ -5,15 +5,19 @@
 }
 
 .btnClass {
+    border: none;
     padding: 0.5em;
     border-radius: 0.5em;
-    background-color: gold;
+    background-color: #FFBC87;
     margin: 1em;
+}
+.btnClass:hover {
+    background-color: #FF9D4E;
 }
 
 #cardsContainer {
     display: grid;
-    grid-template-rows: 50% 50%;
+    grid-template-columns: 50% 50%;
 }
 
 .panels {
@@ -26,7 +30,7 @@
     grid-area: 1 / 1 / 2 / 2;
     display: inline-flex;
     flex-direction: column;
-    /* justify-self: center; */
+    padding: 10px;
 }
 
 #addCard {
@@ -36,14 +40,36 @@
 .cards {
     text-align: center;
     margin: 0.5em auto;
-    border: 2px solid black;
+    background: -webkit-linear-gradient(rgba(110, 132, 235, 0.8), rgba(80, 102, 204, 0.8)),url('../images/codeCard.jpg');
+    width: 50%;
+    border-radius: 10px;
+    box-shadow: 5px 5px 5px 0px rgba(0,0,0,0.75);
+
+}
+img {
+    object-fit: cover;
+}
+.cardBtn {
+    background-color:  #6E84EB;
+    width: 8em;
+    height: 2em;
+    margin: 5px;
+    border: none;
+    border-radius: 5px;
+
+}
+.cardBtn:hover {
+    background-color: #5066CC;
 }
 
 #cardTitle {
     margin: auto;
+    font-size: 1.25em;
+    font-weight: bold;
 }
 #rightPanel {
-    grid-area: 1 / 2 / 2 / 3;
+    grid-area: 1 / 2 / span 1 / span 1;
+    height: 100%;
 }
 
 
