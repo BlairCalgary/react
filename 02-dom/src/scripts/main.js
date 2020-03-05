@@ -28,7 +28,6 @@ removeBtn.addEventListener('click', (() => {
 var i = 0;
 const buildNode = () => {
     var node = document.createElement("DIV");
-    node.setAttribute("name", "testname");
     node.setAttribute("class", "cards");
     var innerCardContent =
        `<span id="cardTitle">Card ${i}</span><br>`+
@@ -38,16 +37,6 @@ const buildNode = () => {
     node.innerHTML += innerCardContent;
     return node;
 };
-// var node = document.createElement("DIV");
-// node.setAttribute("name", "testname");
-// node.setAttribute("class", "cards");
-// var innerCardContent =
-//     `<span id="cardTitle">Card ${i}</span><br>`+
-//     `<button id="addBefore">Add Before</button>`+
-//     `<button id="addAfter">Add After</button><br>`+
-//     `<button id="deleteCard">Delete</button>`;
-// node.innerHTML += innerCardContent;
-// var parent = document.getElementById('leftPanel');
 
 const onClick = (e) => {
     var parent = document.getElementById('leftPanel');

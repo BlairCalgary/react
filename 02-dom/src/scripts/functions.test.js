@@ -12,8 +12,6 @@ document.body.innerHTML =
 `<div id='3'></div>` +
 `</div>`;
 
-
-
 test('Does it add an <li>?', () => {
     var i = document.getElementById('myOL').children.length;
     functions.addLi();
