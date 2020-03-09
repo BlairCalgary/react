@@ -1,6 +1,7 @@
 import functions from './functions.js';
 
 document.body.innerHTML =
+`<div id="myDiv" class="container">`+
 `<ol id='myOL'>This is a list of stuff<br><br>` +
     '<li>Item 1</li>' +
     '<li>Item 2</li>' +
@@ -10,12 +11,15 @@ document.body.innerHTML =
 `<div id='1'></div>` +
 `<div id='2'></div>` +
 `<div id='3'></div>` +
+`</div>` +
 `</div>`;
 
 test('Does it add an <li>?', () => {
     var i = document.getElementById('myOL').children.length;
     functions.addLi();
     expect(document.getElementById('myOL').children.length-i).toBe(1);
+    expect(document.getElementById('myOL').lastChild.textContent).toBe('Append Item');
+    
 });
 
 test('Does it add an <li> to the start?', () => {

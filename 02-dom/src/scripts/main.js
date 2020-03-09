@@ -25,16 +25,35 @@ removeBtn.addEventListener('click', (() => {
 }));
 
 
-var i = 0;
+let i = 0;
 const buildNode = () => {
-    var node = document.createElement("DIV");
+    // Create card div with title
+    const node = document.createElement("DIV");
     node.setAttribute("class", "cards");
-    var innerCardContent =
-       `<span id="cardTitle">Card ${i}</span><br>`+
-        `<button id="addBefore" class="cardBtn">Add Before</button>`+
-        `<button id="addAfter" class="cardBtn">Add After</button><br>`+
-        `<button id="deleteCard" class="cardBtn"">Delete</button>`;
-    node.innerHTML += innerCardContent;
+    const span = document.createElement("span");
+    node.appendChild(span);
+    span.setAttribute("id", "cardTitle");
+    span.textContent = `Card ${i}`;
+    node.appendChild(document.createElement("br"));
+    // Create beforeNode button node
+    const beforeNode = document.createElement("button");
+    beforeNode.setAttribute("id", "addBefore");
+    beforeNode.setAttribute("class", "cardBtn");
+    beforeNode.textContent = `Add Before`;
+    node.appendChild(beforeNode);
+    // Create afterNode button node
+    const afterNode = document.createElement("button");
+    afterNode.setAttribute("id", "addAfter");
+    afterNode.setAttribute("class", "cardBtn");
+    afterNode.textContent = `Add After`;
+    node.appendChild(afterNode);
+    node.appendChild(document.createElement("br"));
+    // Create deleteNode button node
+    const deleteNode = document.createElement("button");
+    deleteNode.setAttribute("id", "deleteCard");
+    deleteNode.setAttribute("class", "cardBtn");
+    deleteNode.textContent = `Delete`;
+    node.appendChild(deleteNode);
     return node;
 };
 
@@ -63,4 +82,4 @@ leftPanel.addEventListener('click', ((e) => {
     onClick(e);
 }));
 
-
+export default buildNode;
