@@ -24,8 +24,8 @@ removeBtn.addEventListener('click', (() => {
     functions.removeLi();
 }));
 
-
 let i = 0;
+
 const buildNode = () => {
     // Create card div with title
     const node = document.createElement("DIV");
@@ -82,4 +82,3 @@ leftPanel.addEventListener('click', ((e) => {
     onClick(e);
 }));
 
-export default buildNode;

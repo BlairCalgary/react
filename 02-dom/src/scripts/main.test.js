@@ -14,4 +14,6 @@ document.body.innerHTML =
 `</div>` +
 `</div>`;
 
+let myDiv = document.getElementById('myDiv');
+
 console.log('in main.test.js')
