@@ -7,7 +7,7 @@ class Person {
         this.age++;
     }
     show() {
-        return `${this.name} is ${this.age} old`
+        return `${this.name} is ${this.age} years old`
     }
 }
 
@@ -31,3 +31,5 @@ larry.birthday();
 console.log(larry.show());
 
 console.log(roman.show());
+
+export default Person
