@@ -1,0 +1,43 @@
+#container {
+    width: 50vw;
+    min-width: 600px;
+    display: grid;
+    grid-template-columns: 50% 50%;
+}
+#displayPanel{
+    border-right: solid;
+}
+#actionPanel {
+    margin-left: 1em;
+}
+
+#account {
+    text-decoration: underline;
+    align-content: center;
+}
+.acctPair {
+    display: grid;
+}
+.btn {
+    background-color: powderblue;
+    width: 10em; 
+    resize: none;
+    border-radius: 0.5em;
+    border: none;
+    grid-area: 1 / 2 / 2 / 3;
+    padding: 0.5em;
+    margin: 0.5em;
+}
+
+#errMsg {
+    color: red;
+}
+#balOutput {
+    padding: 5px;
+    margin: 5px;
+    height: 30px;
+}
+#acctName {
+    grid-area: 1 / 1 / 2 / 2;
+    align-self: center;
+}
