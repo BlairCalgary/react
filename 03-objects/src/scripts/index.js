@@ -1,57 +1,29 @@
-import Account from './account.js'
+import {Account} from './account.js';
+import {AccountController} from './account.js';
 
-const account = new Account('Chequing', 25);
+// Add Event Listeners
+totalFunds.addEventListener('click', (() => {
+    clearOutputs();
+    totalFundsOutput.textContent = accountController.totalAccts();
+}));
 
-// function onClick(e)  {
-//     if (amtInput>0) {
-//         switch (e.target.id) {
-//             case 'balanceBtn' :
-//                 balanceBtn.textContent = 'Balance';
-//                 break;
-//             case 'depositBtn' :
-//                 balanceBtn.textContent = 'Deposit';
-//                 break;
-//             case 'withdrawBtn' :
-//                 balanceBtn.textContent = 'Withdraw';
-//                 break;
-//         }
-//     } else {
-//         alert('ERR: Must be a number greater than 0');
-//     }
-    
-// }
+acctMax.addEventListener('click', (() => {
+    clearOutputs();
+    acctMaxOutput.textContent = accountController.acctMax();
+}));
 
-function errorMsg() {
-    console.log('in error message')
-    errMsg.textContent = 'Value must be greater than zero.';
-    // const brNode = document.createElement('br');
-    // const parent = document.getElementById('actionPanel');
-    // const targetNode = document.getElementById('amtInput');
-    // parent.insertBefore(brNode,targetNode.nextSibling);
-    // const newnode = document.createElement("span");
-    // newnode.className = 'alert';
-    // newnode.textContent = 'Value must be greater than zero.';
-    // console.log(parent);
-    // console.log(targetNode);
-    // console.log(newnode);
-    // parent.insertBefore(newnode,targetNode.nextSibling);
-    // parent.insertBefore(brNode,targetNode.nextSibling);
-    // // balOutput.textContent = 'amt =< 0';
-};
-
-balanceBtn.addEventListener('click', ((e) => {
-    balOutput.textContent = account.display();
+acctMin.addEventListener('click', (() => {
+    clearOutputs();
+    acctMinOutput.textContent = accountController.acctMin();
 }));
 
 depositBtn.addEventListener('click', ((e) => {
-    if (amtInput.value>0) {
-        // const amtTemp = Number(amtInput.value);
-        // amtInput.value = amtTemp.toFixed(2);
-        
-        
-        
-        account.deposit(amtInput.value);
-        balOutput.textContent = account.display();
+    if (amtInput.value>0 && !(accountList.value==='Please select')) {
+        let index = accountController.accts.findIndex(x => x.name===accountList.value);
+        amtInput.value = Number(amtInput.value).toFixed(2);
+        accountController.accts[index].deposit(Number(amtInput.value));
+        rebuildCards();
+        clearOutputs();
     } else {
         errorMsg();
     }
@@ -59,11 +31,116 @@ depositBtn.addEventListener('click', ((e) => {
 
 withdrawBtn.addEventListener('click', ((e) => {
     if (amtInput.value>0) {
-        // const amtTemp = Number(amtInput.value);
-        // amtInput.value = amtTemp.toFixed(2);
-        account.withdraw(amtInput.value);
-        balOutput.textContent = account.display();
+        let index = accountController.accts.findIndex(x => x.name===accountList.value);
+        amtInput.value = Number(amtInput.value).toFixed(2);
+        accountController.accts[index].withdraw(Number(amtInput.value));
+        // balOutput.textContent = accountController.accts[0].display().toFixed(2);
+        rebuildCards();
+        clearOutputs();
     } else {
         errorMsg();
     }
 }));
+
+openAcct.addEventListener('click', (() => {
+    if (!(newAcctName.value==="")) {
+        accountController.addAcct(new Account(newAcctName.value, Number(startBal.value)));
+        updateAccts();
+        addAcctCard(accountController.accts[accountController.accts.length-1]);
+        clearOutputs();
+    }
+}));
+
+displayPanel.addEventListener('click', ((e) => {
+    if (e.target.id==='closeAcct') {
+        if (Number(e.target.parentNode.childNodes[1].textContent)===0) {
+            closeAcct(e.target);
+        } else {
+            errMsg.textContent = 'Only empty accounts can be closed.';
+        }
+    }
+}));
+
+// Declare Functions
+function clearOutputs() {
+    let index;
+    let classes = document.getElementsByClassName('output');
+     for (index = 0; index < classes.length; index++) {
+        classes[index].textContent = "";
+    }
+    newAcctName.value = "";
+    startBal.value = "";
+    amtInput.value = "";
+    accountList.value = "Please select";
+}
+function closeAcct(eventTarget) {
+    // Only close account if there are more than 1 account
+    if (accountController.accts.length > 1) {
+        // Remove div card from displayPanel
+        accountController.removeAcct(eventTarget.parentNode.childNodes[0].textContent);
+        updateAccts();
+        rebuildCards();
+        clearOutputs();
+    }
+}
+function addAcctCard(obj) {
+    clearOutputs();
+    let acctparent = document.getElementById('displayPanel');
+    let childNode = document.createElement("div");
+    childNode.className = 'Card';
+    let spanNode = document.createElement("span");
+    spanNode.setAttribute("id", "acctName");
+    spanNode.textContent = obj.name;
+    childNode.appendChild(spanNode);
+    let outputNode = document.createElement("span");
+    outputNode.setAttribute("id", "balOutput");
+    outputNode.className = "balOutput"
+    outputNode.textContent = Number(obj.balance).toFixed(2);
+    childNode.appendChild(outputNode);
+    let btnNode = document.createElement("button");
+    btnNode.setAttribute("id", 'closeAcct');
+    btnNode.className = 'closeAcct btn';
+    btnNode.textContent = 'Close Acct';
+    childNode.appendChild(btnNode);
+    acctparent.append(childNode);
+}
+function rebuildCards() {
+    clearOutputs();
+    let parent = document.getElementById('displayPanel');
+    let child;
+    while (parent.childElementCount>0) {
+        child=parent.lastElementChild
+        parent.removeChild(child);
+    }
+    let x;
+    for (x = 0; x < accountController.accts.length; x++) {
+        addAcctCard(accountController.accts[x]);
+    }
+}
+function updateAccts() {
+    clearOutputs();
+    let parent = document.getElementById('accountList');
+    let child;
+    while (parent.childElementCount>1) {
+        child=parent.lastElementChild
+        parent.removeChild(child);
+    }
+    let i;
+    for (i = 0; i < accountController.accts.length; i++) {
+        let nodeAcct = document.createElement("OPTION");
+        nodeAcct.textContent = `${accountController.accts[i].name}`;
+        parent.appendChild(nodeAcct);
+    }
+
+};
+function errorMsg() {
+    errMsg.textContent = 'Required value > zero AND select account.';
+};
+
+// Initialize with chequing account of 25
+const newAcct = 'Chequing'
+const account = new Account(newAcct, 25);
+const accountController = new AccountController();
+accountController.addAcct(account);
+updateAccts();
+rebuildCards();

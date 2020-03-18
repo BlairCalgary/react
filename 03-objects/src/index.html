@@ -8,24 +8,46 @@
 </head>
 <body>
     <div id="container">
-        <div id="displayPanel">
-            <span id="account">Account Balance</span><br>
-            <div class="acctPair">
-                <span id="acctName">Chequing</span>
-                <button id="balOutput" class="btn">test</button>
+        <div id="left" class="divBorder">
+            <div class="divBox">
+                <span id="account">Account Balances</span><br>
+                <div id="displayPanel">
+
+                </div>
+            </div>
+            <div class="divBox">
+                <span id="account">Account Management</span><br>
+                <button id="openAcct" class="btn">Open Account</button>
+                <input id="newAcctName" type="name" placeholder="New account name"></input>
+                <input id="startBal" type="number" placeholder="Starting balance"></input>
+            </div>
+            <div class="divBox">
+                <span id="account">Account Tools</span><br>
+                <button id="totalFunds" class="btn">Total Funds</button>
+                <span id="totalFundsOutput" class="output" type="name"></span><br>
+                <button id="acctMax" class="btn">Largest Acct</button>
+                <span id="acctMaxOutput" class="output" type="number"></span><br>
+                <button id="acctMin" class="btn">Smallest Acct</button>
+                <span id="acctMinOutput" class="output" type="number"></span>
+                
             </div>
         </div>
-        <div id="actionPanel">
-            <span id="amount">Amount</span>
-            <input id="amtInput" type="number"><br>
-            <span id="errMsg"></span><br>
-            <button id="depositBtn" class="btn">Deposit</button><br>
-            <button id="withdrawBtn" class="btn">Withdraw</button>
-            <br>
-            <button id="balanceBtn" class="btn">Balance</button>
-            
+        <div id="actionPanel" class="divBorder">
+            <div class="divBox">
+                <span id="amount">Amount</span>
+                <input id="amtInput" type="number"><br>
+                <span id="errMsg" class="output"></span><br>
+                <select id="accountList" name="accountList">
+                    <option selected="">Please select</option>
+                </select><br>
+                <button id="depositBtn" class="btn">Deposit</button><br>
+                <button id="withdrawBtn" class="btn">Withdraw</button>
+            </div>
+      
         </div>
     </div>
     <script type="module" src="./scripts/index.js"></script>
+    <!-- <script type="module" src="./scripts/classSpike.js"></script> -->
+    
 </body>
 </html>
