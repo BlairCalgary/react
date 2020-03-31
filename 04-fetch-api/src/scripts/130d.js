@@ -1,4 +1,4 @@
-import fetch from "node-fetch";
+// import fetch from "node-fetch";
 
 export class City {
     constructor(name, latitude, longitude, population, key) {
@@ -101,6 +101,7 @@ export class Controller {
 
 export class CityFetch {
     constructor() {
+        this.cities = [];
         this.header = {
             mode: 'cors',       // no-cors, *cors, same-origin
             cache: 'no-cache',  // *default, no-cache, reload, force-cache, only-if-cached
@@ -121,7 +122,15 @@ export class CityFetch {
         header.body = JSON.stringify(data);
         // console.log(header);
         const response = await fetch(url, header);
-        return await response.json();   // parses JSON response into native JavaScript objects
+        // console.log('Add Route status: ', response.status);
+        // if (response.status > 199 && response.status < 300) {
+        //     Controller.createCity(data)
+        //     console.log('Add Route: Success')
+        // } else {
+        //     console.log('Add Route: Fail')
+        // }
+        return await response;   // parses JSON response into native JavaScript objects
+    
     }
     async read(key) {
         const keyJson = {

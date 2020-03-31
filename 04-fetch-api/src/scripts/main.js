@@ -1,15 +1,21 @@
-import functions from './functions.js';
-import {functions as fetchFunc} from './fetch.js';
-// import { foo as bar } from 'my-module';
+// import {City} from './130d.js';
+// import {CityFetch} from './130d.js';
+// import {Controller} from './130d.js';
+
+const functions = {
+
+}
 
 
-// **********
-//
-// Add the event listeners
-// 
+function test() {
+    console.log('Test');
+}
 
-idNumber.addEventListener('change', (() => {
-    idNumberSize.textContent = functions.size(idNumber.value);
-}));
+Promise
+    .resolve(test())
+    .then(test())
+    .then(test());
+
+
 
 
