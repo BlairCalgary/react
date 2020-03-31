@@ -7,14 +7,14 @@ const functions = {
 }
 
 
-function test() {
-    console.log('Test');
-}
+// function test() {
+//     console.log('Test');
+// }
 
-Promise
-    .resolve(test())
-    .then(test())
-    .then(test());
+// Promise
+//     .resolve(test())
+//     .then(test())
+//     .then(test());
 
 
 

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="./fetch.css">
+    <title>Document</title>
+</head>
+<body>
+    <div id="container" class="divBorder">
+        <div id="leftPanel">
+            <div id="addCityDiv" class="divBox">
+                Name:<input id="cityName"></input><br>
+                Latitude:<input id="lat"></input><br>
+                Longitude:<input id="long"></input><br>
+                Population:<input id="pop"></input><br>
+                <button id="cityAdd" class="btn">Add Above City</button><br>
+            </div>
+            <div id="totalPopDiv" class="divBox">
+                <button id="totalPopBtn" class="btn">Total Pop:</button><span id="totalPopOutput"></span>
+            </div>
+            <div id="mostNorthDiv" class="divBox">
+                <button id="mostNorthBtn" class="btn">Most Northern:</button><span id="mostNorthOutput"></span>
+            </div>
+            <div id="mostSouthDiv" class="divBox">
+                <button id="mostSouthBtn" class="btn">Most Southern:</button><span id="mostSouthOutput"></span>
+            </div>
+            <div id="displayDiv" class="divBox">
+                <div>Select 'Show' for settlement details</div>
+                <div id="displayDetailsDiv">
+                    <div id="displayDetailsLeft">
+                        City: <span id="displayCityOutput"></span>
+                        Latitude: <span id="displayLatOutput"></span>
+                        Longitude: <span id="displayLongOutput"></span>
+                        Population: <span id="displayPopOutput"></span>
+                    </div>
+                    <div id="displayDetailsRight">
+                        Hemisphere: <span id="displayHemOutput"></span>
+                        Settlement: <span id="displaySetOutput"></span>
+                        Key: <span id="displayKeyOutput"></span>
+                        <button id="displayDelCity" class="btn">Delete</button>
+                    </div>
+                </div>
+                <span id="mostSouthOutput"></span>
+            </div>
+        </div>
+        <div id="rightPanel">
+            <div id="cityCard" class="divBox Card">
+                <div id="leftCityCard">
+                    <span id="cityCardDisplay">City</span>
+                    <button id="cityCardShow" class="btn">Show</button>
+                </div>
+                <div id="rightCityCard">
+                    <button id="moveIn" class="btn">Move In</button>
+                    <input id="moveInOut">
+                    <button id="moveOut" class="btn">Move Out</button>
+                </div>
+            </div>
+        </div>
+        
+        
+        
+        <!-- <h1>Fetch API</h1>
+        <button id="reloadServer">Reload Server Data</button><br>
+        <button id="clCities">Console Log controller.cities</button><br>
+        <button id="loadData">Load Server Data</button><br>
+        <button id="nextKey">Next Available Key</button><br>
+        Name:<input id="cityName"></input><br>
+        Latitude:<input id="lat"></input><br>
+        Longitude:<input id="long"></input><br>
+        Population:<input id="pop"></input><br>
+        <button id="cityAdd">Add Above City</button><br>
+        Key:<input id="keyReadInput"></input><button id="keyRead">Read Key</button><br> -->
+        <!-- <script type="module" src="./scripts/main.js"></script> -->
+    </div>
+    <script type="module" src="./scripts/index.js"></script>    
+</body>
+
+</html>

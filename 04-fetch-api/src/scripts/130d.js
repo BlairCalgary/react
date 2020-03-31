@@ -50,6 +50,56 @@ export class City {
     }
 }
 
+export class Shitty {
+    constructor({name, latitude, longitude, population, key}) {
+        this.name = name;
+        this.latitude = latitude;
+        this.longitude = longitude;
+        this.population = population;
+        this.key = key
+    }
+    show() {
+        return this.name +
+            this.latitude +
+            this.longitude +
+            this.population
+    }
+    movedIn(moveIn) {
+        this.population+=moveIn;
+        return this.population;
+    }
+    movedOut(moveOut) {
+        this.population-=moveOut;
+        return this.population;
+    }
+    howBig() {
+        // return 'City';
+        switch (true) {
+            case this.population > 100000:
+                return 'City';
+                // break;
+            case this.population > 20000:
+                return 'Large town';
+                // break;
+            case this.population > 1000:
+                return 'Town';
+                // break;
+            case this.population > 100:
+                return 'Village';
+                // break;
+            default:
+                return 'Hamlet';
+        }
+    }
+    whichSphere() {
+        if (this.latitude > 0) {
+            return 'Northern';
+        } else {
+            return 'Southern';
+        }
+    }
+}
+
 export class Controller {
     constructor() {
         this.cities = [];

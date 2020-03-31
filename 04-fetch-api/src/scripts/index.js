@@ -1,47 +1,32 @@
 import {City} from './130d.js';
+import {Shitty} from './130d.js';
 import {CityFetch} from './130d.js';
 import {Controller} from './130d.js';
 
 const cityFetch = new CityFetch;
-
-// Temporary city data 
-const yyc = ("1","Calgary","51.03","-114.37","1285711");
-//     "key":"1",
-//     "name":"Calgary",
-//     "latitude":"51.03",
-//     "longitude":"-114.37",
-//     "population":"1285711"
-// };
-
-// const yk = {
-//     "key":"-114.54",
-//     "name":"Yellowknife",
-//     "latitude":"62.47",
-//     "longitude":"-114.54",
-//     "population":"-114.54"
-// };
-
-// const slc = {
-//     "key":"3",
-//     "name":"Salt Lake City",
-//     "latitude":"40.78",
-//     "longitude":"-112.06",
-//     "population":"200544"
-// };
-
 const controller = new Controller;
-controller.createCity(new City("Calgary","51.03","-114.37","1285711","1"));
-controller.createCity(new City("Yellowknife","62.47","-114.54","-114.54","2"));
-controller.createCity(new City("Salt Lake City","40.78","-112.06","200544","3"));
-console.log('controller.cities: ', controller.cities);
 
-
+// Load server data to use this session
+async function loadServerData() {
+    const resp = await cityFetch.all();
+    for (const obj in resp) {
+        // console.log(resp[obj]);
+        controller.createCity(new Shitty(resp[obj]));
+    }
+    // return resp[0];
+    // console.log('controller.cities 2: ', controller.cities);
+    // console.log(newKey());
+};
+// loadServerData();
+// f().then(resp => console.log(resp));
 
 function newKey() {
     const keys = [];
     for (const keyCount in controller.cities) {
         keys.push(controller.cities[keyCount].key);
+        // console.log(`object key: `, controller.cities[keyCount]);
     }
+    // console.log ('In newKey func: keys[]', keys);
     let i = 0;
     do {
         i++;
@@ -50,34 +35,36 @@ function newKey() {
     return String(i);
 }
 
-console.log('Typeof: '+(typeof newKey())+' | '+newKey());
+// console.log('Typeof: '+(typeof newKey())+' | '+newKey());
 
 async function addCity() {
-    const merName = "Mérida";
-    const merLat = "20.98";
-    const merLong = "-89.77";
-    const merPop = "892363";
-    const cityObj = new City;
+    // const merName = name.value;
+    // const merLat = lat.value;
+    // const merLong = long.value;
+    // const merPop = pop.value;
+    // // const cityObj = new City;
+    
+    const cityObj = {};
     cityObj.key = newKey();
     // const key = newKey();
     
     // replace variable with element.textContent of input field
     
-    cityObj.name = merName;
-    cityObj.latitude = merLat;
-    cityObj.longitude = merLong;
-    cityObj.population = merPop;
+    cityObj.name = cityName.value;
+    cityObj.latitude = lat.value;
+    cityObj.longitude = long.value;
+    cityObj.population = pop.value;
     const resp = await cityFetch.add(cityObj);
     
     // const resp = await cityFetch.add(new City(merName, merLat, merLong, merPop, key));
     
     if (resp.status===200) {
-        controller.createCity(cityObj);
-        console.log(controller.cities);
+        controller.createCity(new Shitty(cityObj));
+        // console.log(controller.cities);
     };
 }
 
-addCity();
+// addCity();
 // addCity().then(() => console.log(newKey()));
 
 
@@ -104,3 +91,27 @@ addCity();
 //     amtInput.value = "";
 //     accountList.value = "Please select";
 // }
+
+reloadServer.addEventListener('click', (() => {
+    cityFetch.load();
+}));
+
+loadData.addEventListener('click', (() => {
+    loadServerData();
+}));
+
+clCities.addEventListener('click', (() => {
+    console.log(controller.cities);
+}));
+
+nextKey.addEventListener('click', (() => {
+    console.log(newKey());
+}));
+
+cityAdd.addEventListener('click', (() => {
+    addCity();
+}));
+
+keyRead.addEventListener('click', (() => {
+    console.log(cityFetch.read(keyReadInput.value));
+}));
