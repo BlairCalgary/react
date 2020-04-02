@@ -1,56 +1,65 @@
 // import fetch from "node-fetch";
 
-export class City {
-    constructor(name, latitude, longitude, population, key) {
-        this.name = name;
-        this.latitude = latitude;
-        this.longitude = longitude;
-        this.population = population;
-        this.key = key
+// export class City {
+//     constructor(name, latitude, longitude, population, key) {
+//         this.name = name;
+//         this.latitude = latitude;
+//         this.longitude = longitude;
+//         this.population = population;
+//         this.key = key
+//     }
+//     show() {
+//         return this.name +
+//             this.latitude +
+//             this.longitude +
+//             this.population
+//     }
+//     movedIn(moveIn) {
+//         this.population+=moveIn;
+//         return this.population;
+//     }
+//     movedOut(moveOut) {
+//         this.population-=moveOut;
+//         return this.population;
+//     }
+//     howBig() {
+//         // return 'City';
+//         switch (true) {
+//             case this.population > 100000:
+//                 return 'City';
+//                 // break;
+//             case this.population > 20000:
+//                 return 'Large town';
+//                 // break;
+//             case this.population > 1000:
+//                 return 'Town';
+//                 // break;
+//             case this.population > 100:
+//                 return 'Village';
+//                 // break;
+//             default:
+//                 return 'Hamlet';
+//         }
+//     }
+//     whichSphere() {
+//         if (this.latitude > 0) {
+//             return 'Northern';
+//         } else {
+//             return 'Southern';
+//         }
+//     }
+// }
+
+export class Capitals {
+    constructor() {
+        this.capitals = [];
     }
-    show() {
-        return this.name +
-            this.latitude +
-            this.longitude +
-            this.population
-    }
-    movedIn(moveIn) {
-        this.population+=moveIn;
-        return this.population;
-    }
-    movedOut(moveOut) {
-        this.population-=moveOut;
-        return this.population;
-    }
-    howBig() {
-        // return 'City';
-        switch (true) {
-            case this.population > 100000:
-                return 'City';
-                // break;
-            case this.population > 20000:
-                return 'Large town';
-                // break;
-            case this.population > 1000:
-                return 'Town';
-                // break;
-            case this.population > 100:
-                return 'Village';
-                // break;
-            default:
-                return 'Hamlet';
-        }
-    }
-    whichSphere() {
-        if (this.latitude > 0) {
-            return 'Northern';
-        } else {
-            return 'Southern';
-        }
+    addCapital(cap) {
+        this.capitals.push(cap);
     }
 }
 
-export class Shitty {
+export class City {
     constructor({name, latitude, longitude, population, key}) {
         this.name = name;
         this.latitude = latitude;
@@ -65,11 +74,11 @@ export class Shitty {
             this.population
     }
     movedIn(moveIn) {
-        this.population+=moveIn;
+        this.population=String(Number(this.population)+Number(moveIn));
         return this.population;
     }
     movedOut(moveOut) {
-        this.population-=moveOut;
+        this.population=String(Number(this.population)-Number(moveOut));
         return this.population;
     }
     howBig() {
@@ -93,9 +102,9 @@ export class Shitty {
     }
     whichSphere() {
         if (this.latitude > 0) {
-            return 'Northern';
+            return 'N';
         } else {
-            return 'Southern';
+            return 'S';
         }
     }
 }
@@ -117,7 +126,7 @@ export class Controller {
         }
     }
     getMostNorthern() {
-        const most = 0;
+        let most = 0;
         for (const lat in this.cities) {
             ((lat===0)?most=lat:null);
             (this.cities[lat].latitude>this.cities[most].latitude?most=lat:null)
@@ -128,19 +137,18 @@ export class Controller {
         // console.log(this.cities[most].name+`:`+this.cities[most].latitude);
     }
     getMostSouthern() {
-        var most = 0;
+        let most = 0;
         for (const lat in this.cities) {
             ((lat===0)?most=lat:null);
             (this.cities[lat].latitude<this.cities[most].latitude?most=lat:null)
-            // console.log(lat);
-            // console.log(this.cities[lat].latitude);
         }
         return this.cities[most].name;
+        
     }
     getPopulation() {
         const pop = [];
         for (const popCount in this.cities) {
-            pop.push(this.cities[popCount].population);
+            pop.push(Number(this.cities[popCount].population));
         }
         // console.log(pop);
         return pop.reduce((a, b) => a + b, 0);

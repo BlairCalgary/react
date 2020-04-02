@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="./fetch.css">
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
     <title>Document</title>
 </head>
 <body>
@@ -14,46 +15,49 @@
                 Latitude:<input id="lat"></input><br>
                 Longitude:<input id="long"></input><br>
                 Population:<input id="pop"></input><br>
-                <button id="cityAdd" class="btn">Add Above City</button><br>
+                <button id="cityAdd" class="btn">Add Above City</button>
+                <button id="randomCity" class="btn">Random City</button>
             </div>
             <div id="totalPopDiv" class="divBox">
-                <button id="totalPopBtn" class="btn">Total Pop:</button><span id="totalPopOutput"></span>
+                <div>Total Pop: <span id="totalPopOutput"></span></div>
             </div>
             <div id="mostNorthDiv" class="divBox">
-                <button id="mostNorthBtn" class="btn">Most Northern:</button><span id="mostNorthOutput"></span>
+                <div>Most Northern: <span id="mostNorthOutput"></span></div>
             </div>
             <div id="mostSouthDiv" class="divBox">
-                <button id="mostSouthBtn" class="btn">Most Southern:</button><span id="mostSouthOutput"></span>
+                <div>Most Southern: <span id="mostSouthOutput"></span></div>
             </div>
             <div id="displayDiv" class="divBox">
-                <div>Select 'Show' for settlement details</div>
+                <div><em>Select 'Show' for settlement details</em></div><br>
                 <div id="displayDetailsDiv">
                     <div id="displayDetailsLeft">
-                        City: <span id="displayCityOutput"></span>
-                        Latitude: <span id="displayLatOutput"></span>
-                        Longitude: <span id="displayLongOutput"></span>
-                        Population: <span id="displayPopOutput"></span>
+                        <div>City: <span id="displayCityOutput"></span></div>
+                        <div>Latitude: <span id="displayLatOutput"></span></div>
+                        <div>Longitude: <span id="displayLongOutput"></span></div>
+                        <div>Population: <span id="displayPopOutput"></span></div>
                     </div>
                     <div id="displayDetailsRight">
-                        Hemisphere: <span id="displayHemOutput"></span>
-                        Settlement: <span id="displaySetOutput"></span>
-                        Key: <span id="displayKeyOutput"></span>
-                        <button id="displayDelCity" class="btn">Delete</button>
+                        <div>Hemisphere: <span id="displayHemOutput"></span></div>
+                        <div>Settlement: <span id="displaySetOutput"></span></div>
+                        <div>Key: <span id="displayKeyOutput"></span></div>
+                        <div><button id="displayDelCity" class="btn">Delete</button></div>
                     </div>
                 </div>
-                <span id="mostSouthOutput"></span>
+                <!-- <span id="mostSouthOutput"></span> -->
             </div>
         </div>
-        <div id="rightPanel">
-            <div id="cityCard" class="divBox Card">
-                <div id="leftCityCard">
-                    <span id="cityCardDisplay">City</span>
-                    <button id="cityCardShow" class="btn">Show</button>
-                </div>
-                <div id="rightCityCard">
-                    <button id="moveIn" class="btn">Move In</button>
-                    <input id="moveInOut">
-                    <button id="moveOut" class="btn">Move Out</button>
+        <div class="fixHtPanel scrollbar" id="style-4">
+            <div id="rightPanel">
+                <div class="divBox Card">
+                    <div class="leftCityCard">
+                        <span>City</span>
+                        <button class="btn">Show</button>
+                    </div>
+                    <div class="rightCityCard">
+                        <button class="btn">Move In</button>
+                        <input id="moveInOut">
+                        <button class="btn">Move Out</button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -73,7 +77,14 @@
         Key:<input id="keyReadInput"></input><button id="keyRead">Read Key</button><br> -->
         <!-- <script type="module" src="./scripts/main.js"></script> -->
     </div>
-    <script type="module" src="./scripts/index.js"></script>    
+    <script type="module" src="./scripts/index.js"></script>
+    <script>
+        $(document).ready(function () {
+            if (!$.browser.webkit) {
+                $('.wrapper').html('<p>Sorry! Non webkit users. :(</p>');
+            }
+        });
+    </script>    
 </body>
 
 </html>

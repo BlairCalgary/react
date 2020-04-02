@@ -2,8 +2,18 @@ import {City} from './130d.js';
 import {CityFetch} from './130d.js';
 import {Controller} from './130d.js';
 
-const city = new City('Calgary', 51.03, -114.37, 1285711, 1);
-const ba = new City('Buenos Aires', -34.62, -58.5, 2890000, 2);
+const city = new City({
+    key: "1",
+    name: "Calgary",
+    latitude: "51.03",
+    longitude: "-114.37",
+    population: "1285711"});
+const ba = new City({
+    key: "2",
+    name: "Buenos Aires",
+    latitude: "-34.62",
+    longitude: "-58.5",
+    population: "2890000"});
 const cityFetch = new CityFetch;
 const controller = new Controller;
 
@@ -22,9 +32,9 @@ global.fetch = require('node-fetch')
 
 test('Testing constructor', async () =>{
     expect(city.name).toBe('Calgary');
-    expect(city.latitude).toBe(51.03);
-    expect(city.longitude).toBe(-114.37);
-    expect(city.population).toBe(1285711);
+    expect(city.latitude).toBe('51.03');
+    expect(city.longitude).toBe('-114.37');
+    expect(city.population).toBe('1285711');
 });
 
 test('show method returns single string', async () =>{
@@ -33,21 +43,21 @@ test('show method returns single string', async () =>{
 
 test('movedIn adds a number to the population', async () =>{
     const moveIn = 99
-    expect(city.movedIn(moveIn)).toBe(1285810);
-    expect(city.movedIn(moveIn)).toBe(1285909);
+    expect(city.movedIn(moveIn)).toBe('1285810');
+    expect(city.movedIn(moveIn)).toBe('1285909');
 });
 
 test('movedOut subtracts a number from the population', async () =>{
     const moveOut = 10
-    expect(city.movedOut(moveOut)).toBe(1285899);
-    expect(city.movedOut(moveOut)).toBe(1285889);
+    expect(city.movedOut(moveOut)).toBe('1285899');
+    expect(city.movedOut(moveOut)).toBe('1285889');
     // expect(city.movedIn(moveIn)).toBe(1285909);
 });
 
 test('movedOut subtracts a number from the population', async () =>{
     const moveOut = 10
-    expect(city.movedOut(moveOut)).toBe(1285879);
-    expect(city.movedOut(moveOut)).toBe(1285869);
+    expect(city.movedOut(moveOut)).toBe('1285879');
+    expect(city.movedOut(moveOut)).toBe('1285869');
     // expect(city.movedIn(moveIn)).toBe(1285909);
 });
 
