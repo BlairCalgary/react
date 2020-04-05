@@ -117,12 +117,12 @@ export class Controller {
         this.cities.push(obj);
     }
     deleteCity(key) {
+        console.log("Searching for key... ", String(key));
         for (const keyCount in this.cities) {
-            if (this.cities[keyCount].key = key) {
-                this.cities.splice(key);
-            } else {
-                return 'no city with that key exists'
+            if (this.cities[keyCount].key===String(key)) {
+                this.cities.splice(keyCount,1);
             }
+            
         }
     }
     getMostNorthern() {
@@ -219,7 +219,8 @@ export class CityFetch {
         const header = this.header;
         header.method = 'POST';
         header.body = JSON.stringify(keyJson);
-        await fetch(url, header);  
+        await fetch(url, header);
+        
     }
     async load() {
         const url = `http://127.0.0.1:5000/load`;

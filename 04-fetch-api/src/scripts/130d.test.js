@@ -74,8 +74,8 @@ test('return settlement class', async () => {
 });
 
 test('N or W hemisphere', async () => {
-    expect(city.whichSphere()).toBe('Northern');
-    expect(ba.whichSphere()).toBe('Southern');
+    expect(city.whichSphere()).toBe('N');
+    expect(ba.whichSphere()).toBe('S');
 });
 
 test('get most northern', () => {
@@ -92,9 +92,26 @@ test('get total population', () => {
 });
 
 test('test delete city', () => {
-    controller.deleteCity(1);
-    expect(controller.cities.length).toBe(1);
-    // console.log(controller.cities.length);
+    const cont = new Controller();
+    cont.createCity(new City({
+        key: "1",
+        name: "Red Deer",
+        latitude: "51",
+        longitude: "-114",
+        population: "1000"}));
+    cont.createCity(new City({
+        key: "2",
+        name: "Edmonton",
+        latitude: "51",
+        longitude: "-114",
+        population: "2000"}));
+    console.log("Before delete: ", cont.cities);
+    cont.deleteCity(1);
+    console.log("After delete: ", cont.cities);
+    
+    // controller.deleteCity(1);
+    // expect(controller.cities.length).toBe(1);
+    // // console.log(controller.cities.length);
 });
 
 // reload 7 records from file
