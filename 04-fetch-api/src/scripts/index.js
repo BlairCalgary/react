@@ -2,6 +2,7 @@ import {City} from './130d.js';
 import {CityFetch} from './130d.js';
 import {Controller} from './130d.js';
 import {Capitals} from './130d.js';
+// import functions from './main.js';
 
 const cityFetch = new CityFetch;
 const controller = new Controller;
@@ -249,9 +250,9 @@ displayDelCity.addEventListener('click', (() => {
     }
 }));
 
-cityAdd.addEventListener('click', (() => {
-    console.log('Add City');
-}));
+// cityAdd.addEventListener('click', (() => {
+//     console.log('Add City');
+// }));
 
 document.addEventListener('DOMContentLoaded', async () => {
     const caps = await fetch(`https://restcountries.eu/rest/v2/regionalbloc/eu`);
