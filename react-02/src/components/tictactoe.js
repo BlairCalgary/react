@@ -1,7 +1,6 @@
 import React from 'react'
 
 function calculateWinner(squares) {
-    
     const lines = [
         [0,1,2],
         [3,4,5],
@@ -21,28 +20,40 @@ function calculateWinner(squares) {
     if (squares.indexOf(null) === -1) {
         return 'Tie'
     }
-    
     return null;
 }
 
 // Disables all squares:
-function disableSquares() {
-  const dis = document.getElementsByClassName("square");
-
-  let t;
-  for (t=0; t<dis.length; t++) {
-    dis[t].disabled = true;
-  }
-
-}
+// function disableSquares() {
+//   const dis = document.getElementsByClassName("square");
+//   let t;
+//   for (t=0; t<dis.length; t++) {
+//     dis[t].disabled = true;
+//   }
+// }
+// Enables all squares
+// function enableSquares() {
+//   const dis = document.getElementsByClassName("square");
+//   let t;
+//   for (t=0; t<dis.length; t++) {
+//     dis[t].disabled = false;
+//   }
+// }
 
 function Square(props) {
-    
-  return (
-        <button className="square" onClick={props.onClick}>
+  if (props.humanTurn===null) {
+    return (
+      <button id={props.index} className="square" >
+          {props.value}
+      </button>
+    )
+  } else {
+      return (
+        <button id={props.index} className="square" onClick={props.onClick} >
             {props.value}
         </button>
-    );
+      )
+    };
 }
 
 class Board extends React.Component {
@@ -51,13 +62,13 @@ class Board extends React.Component {
         <Square
         value={this.props.squares[i]}
         onClick={() => this.props.onClick(i)}
-        
-  />
+        humanTurn={this.props.humanTurn}
+        index={i}
+      />
     )
   }
 
   render() {
-    
     return (
       <div>
         <div className="board-row">
@@ -80,7 +91,80 @@ class Board extends React.Component {
   }
 }
 
+function minimax(board, depth, isMaximizing, myState) { //board, depth, isMaximizing, state
+  let result = calculateWinner(board);
+  if (result !== null) {
+    // console.log('result: ', result)
+    return myState.scores[result];
+  }
+  if (isMaximizing) {
+    let bestScore = -Infinity;
+    let k;
+    for (k = 0; k < 10; k++) {
+      // Is the spot available?
+      if (board[k]===null) {
+        board[k]=myState.ai;
+        let score = minimax(board, depth + 1, false, myState);
+        board[k] = null;
+        bestScore = Math.max(score, bestScore)
+      }
+    }
+    return bestScore;
+  } else {
+    let bestScore = Infinity;
+    let m;
+    for (m = 0; m < 9; m++) {
+      // Is the spot available?
+      if (board[m]===null) {
+        board[m]=myState.human;
+        let score = minimax(board, depth + 1, true, myState);
+        board[m] = null;
+        bestScore = Math.min(score, bestScore)
+      }
+    }
+    return bestScore;
+  }
+}
 
+const bestMove = (board, myState) => { // board state , this.state
+  let bestScore = -Infinity;
+  let move;
+  let j;
+  for (j = 0; j < 9; j++) {
+    if (board[j] === null) {
+      board[j] = myState.ai;
+      let score = minimax(board, 0, false, myState); //false
+      board[j] = null;
+      if (score > bestScore) {
+        bestScore = score;
+        move = j;
+      }
+    }
+  }
+  const randomNumber = Math.floor((Math.random() * 5));
+  if (randomNumber===0) {
+    let t;
+    for (t=0;t<9;t++) {
+      if (board[t]===null) {
+        return t;
+      }
+    }
+  }
+  
+  return move;
+}
+
+
+// function handleClick(i, historyState, xIsNext, stepState, clickSetState) {
+//   const history = historyState.slice(0, stepState + 1);
+//   const current = history[history.length - 1];
+//   const squares = current.squares.slice();
+//   if (calculateWinner(squares) || squares[i]) {
+//       return;
+//   }
+//   squares[i] = xIsNext ? 'X' : 'O';
+//   Tictactoe.clickSetState(history, squares);
+// }
 
 
 class Tictactoe extends React.Component {
@@ -94,172 +178,123 @@ class Tictactoe extends React.Component {
             xIsNext: true,
             humanTurn: null,
             scores: {
-              'X': -10,
-              'O': 10,
+              'X': -10,//-10
+              'O': 10,//10
               'Tie': 0
             },
             ai: 'O',
             human: 'X',
-            isORobotMax: true
         };
     }
+      
     handleClick(i) {
-        const history = this.state.history.slice(0, this.state.stepNumber + 1);
-        const current = history[history.length - 1];
-        const squares = current.squares.slice();
-        if (calculateWinner(squares) || squares[i]) {
-            return;
-        }
-
-        squares[i] = this.state.xIsNext ? 'X' : 'O';
-        this.setState({
-            history: history.concat([{
-                squares: squares,
-            }]),
-            stepNumber: history.length,
-            xIsNext: !this.state.xIsNext,
-            humanTurn: !this.state.humanTurn,
-        });
+      const history = this.state.history.slice(0, this.state.stepNumber + 1);
+      const current = history[history.length - 1];
+      const squares = current.squares.slice();
+      if (calculateWinner(squares) || squares[i]) {
+          return;
       }
+      squares[i] = this.state.xIsNext ? 'X' : 'O';
+      this.clickSetState(history, squares);
+    }
     
-     jumpTo(step) {
-        this.setState({
-            stepNumber: step,
-            xIsNext: (step % 2) === 0,
-            
-        })
+    clickSetState(history, squares) {
+      this.setState({
+        history: history.concat([{
+            squares: squares,
+        }]),
+        stepNumber: history.length,
+        xIsNext: !this.state.xIsNext,
+        humanTurn: !this.state.humanTurn,
+      });
+    }
+      
 
+
+    jumpTo(step) {
+      this.setState({
+          stepNumber: step,
+          xIsNext: (step % 2) === 0,
+      })
     }
 
-    minimax(board, depth, isMaximizing) {
-      let result = calculateWinner(board);
-      if (result !== null) {
-        // console.log('result: ', result)
-        return this.state.scores[result];
-      }
-      if (isMaximizing) {
-        let bestScore = -Infinity;
-        let k;
-        for (k = 0; k < 10; k++) {
-          // Is the spot available?
-          if (board[k]===null) {
-            board[k]=this.state.ai;
-            let isORobotMax = this.state.isORobotMax
-            let score = this.minimax(board, depth + 1, !isORobotMax); //false 
-            board[k] = null;
-            bestScore = Math.max(score, bestScore)
-            // console.log('bestScore: ', bestScore)
-          }
-        }
-        // alert(board[0] + board[1] + board[2] + "\n" +
-        //   board[3] + board[4] + board[5] + "\n" +
-        //   board[6] + board[7] + board[8] + "\n :" + bestScore + "k: " + k
-        // )
-        return bestScore;
-      } else {
-        let bestScore = Infinity;
-        let m;
-        for (m = 0; m < 9; m++) {
-          // Is the spot available?
-          if (board[m]===null) {
-            board[m]=this.state.human;
-            let isORobotMax = this.state.isORobotMax
-            let score = this.minimax(board, depth + 1, isORobotMax); //true 
-            board[m] = null;
-            bestScore = Math.min(score, bestScore)
-          }
-        }
-        return bestScore;
-      }
-    }
+    // bestMove(board) { // board state , this.state
+    //   let bestScore = -Infinity;
+    //   let move;
+    //   let j;
+    //   for (j = 0; j < 9; j++) {
+    //     if (board[j] === null) {
+    //       board[j] = this.state.ai;
+    //       let score = minimax(board, 0, false, this.state); //false
+    //       board[j] = null;
+    //       if (score > bestScore) {
+    //         bestScore = score;
+    //         move = j;
+    //       }
+    //     }
+    //   }
+    //   const randomNumber = Math.floor((Math.random() * 5));
+    //   console.log('randomNumber: ', randomNumber);
+    //   if (randomNumber===0) {
+    //   }
+  
+    //   return move;
+    // }
 
-    bestMove(board) {
-      // AI to make its turn
-      let bestScore = -Infinity;
-      let move;
-      let j;
-      for (j = 0; j < 9; j++) {
-        // Is the spot available?
-        if (board[j] === null) {
-          board[j] = this.state.ai;
-          let score = this.minimax(board, 0, false);
-          
-          board[j] = null;
-          if (score > bestScore) {
-            // console.log('score: ',score);
-            // console.log('bestScore: ',bestScore);
-            
-            bestScore = score;
-            move = j;
-          }
-        }
-      }
-      return move;
-    }
-
-    async nextTurn(board) {
-      await new Promise(r => setTimeout(r, 250));
-      // const board = this.state.history[this.state.history.length - 1]
+    nextTurn(board) { 
       const squares = board.squares.slice();
-      // const history = this.state.history.slice(0, this.state.stepNumber + 1);
-      var theMove = this.bestMove(squares);
+      var theMove = bestMove(squares, this.state);
       this.handleClick(theMove);
-      console.log('this.state.xIsNext: ',this.state.xIsNext);
     }
+
+    // async nextTurn(board) { 
+    //   disableSquares();
+    //   await new Promise(r => setTimeout(r, 250));
+    //   enableSquares();
+    //   const squares = board.squares.slice();
+    //   var theMove = bestMove(squares, this.state);
+    //   this.handleClick(theMove);
+    // }
 
     pickStart() {
+      // disableSquares();
       return(
         <div>
+          Starting Player:<br></br>
         <button
           onClick={() => {
-            console.log('in quishy start');
-            
-            // ***
-            // disableSquares();
-            // ***
-            
             this.setState ({
               humanTurn: true,
             })
-          }}>Squishy start</button>
+          }}>Squishy</button>
         <button
           onClick={() => {
-            console.log('in robot start.');
+            // console.log('in robot start.');
             this.setState ({
               humanTurn: false,
               ai: 'X',
               human: 'O',
-              isORobotMax: false
-            
-              // 'X': -10,
-              // 'O': 10,
-              // 'Tie': 0
+              scores: {
+                'X': 10,//-10
+                'O': -10,//10
+                'Tie': 0
+              }
             })
-          }}>Robot start</button>
+          }}>Robot</button>
         </div>
       )
     }
 
+
+    
   render() {
     const history = this.state.history;
     const current = history[this.state.stepNumber];
     const winner = calculateWinner(current.squares);
     const humanTurn = this.state.humanTurn;
-    // const moves =
-    history.map((step, index) => {
-        const desc = index ?
-            'Go to move #' + index :
-            'Go to game start';
-        return (
-            <li key={index}>
-                <button
-                  onClick={() => this.jumpTo(index)}>{desc}
-                </button>
-            </li>
-        );
-    });
-    let status;
-    let choose;
+
+    let status, choose, status2
+    
     if (winner) {
         status = 'Winner: ' + winner;
     } else {
@@ -267,27 +302,26 @@ class Tictactoe extends React.Component {
           choose = this.pickStart();
         } else {
           if (humanTurn===false) {
-            this.nextTurn(current, this.state.xIsNext)
-          }
-        }
-        status = 'Next Player: ' + (this.state.xIsNext ? 'X' : '0');
-    }
 
+            this.nextTurn(current)
+          }
+          status = 'Squishy: ' + this.state.human
+          status2 = 'Robot: ' + this.state.ai
+        }
+    }
    
     return (
       <div className="game">
         <div className="game-board">
           <Board
             squares={current.squares}
-            onClick={(i) => this.handleClick(i)} />
+            onClick={(i) => this.handleClick(i)}
+            humanTurn={this.state.humanTurn}/>
         </div>
         <div className="game-info">
-          <div>HumanTurn:{this.state.humanTurn}</div>
-          <div>{choose}</div>
-          <div>{status}</div>
-          
-          {/* <ol>{moves}</ol> */}
-          
+        <div>{choose}</div>
+        <div>{status}</div>
+        <div>{status2}</div>
         </div>
       </div>
     );
