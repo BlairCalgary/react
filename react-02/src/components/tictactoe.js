@@ -61,7 +61,9 @@ class Board extends React.Component {
     return (
         <Square
         value={this.props.squares[i]}
+        
         onClick={() => this.props.onClick(i)}
+
         humanTurn={this.props.humanTurn}
         index={i}
       />
@@ -185,9 +187,11 @@ class Tictactoe extends React.Component {
             ai: 'O',
             human: 'X',
         };
+        this.handleClick = this.handleClick.bind(this)
     }
       
     handleClick(i) {
+      console.log('handleClick triggered')
       const history = this.state.history.slice(0, this.state.stepNumber + 1);
       const current = history[history.length - 1];
       const squares = current.squares.slice();
@@ -285,37 +289,60 @@ class Tictactoe extends React.Component {
       )
     }
 
-
-    
-  render() {
+  getChooseStatus() {
     const history = this.state.history;
     const current = history[this.state.stepNumber];
     const winner = calculateWinner(current.squares);
     const humanTurn = this.state.humanTurn;
-
     let status, choose, status2
     
     if (winner) {
-        status = 'Winner: ' + winner;
+      status = 'Winner: ' + winner;
     } else {
-        if (humanTurn===null) {
-          choose = this.pickStart();
-        } else {
-          if (humanTurn===false) {
+      if (humanTurn===null) {
+        choose = this.pickStart();
+      } else {
+        if (humanTurn===false) {
 
-            this.nextTurn(current)
-          }
-          status = 'Squishy: ' + this.state.human
-          status2 = 'Robot: ' + this.state.ai
+          this.nextTurn(current)
         }
+        status = 'Squishy: ' + this.state.human
+        status2 = 'Robot: ' + this.state.ai
+      }
     }
+    console.log('in getChooseStatus')
+    return [status, choose,status2]
+  }
+    
+  render() {
+    // let status, choose, status2
+    const [status, choose, status2] = this.getChooseStatus()
+    const history = this.state.history;
+    const current = history[this.state.stepNumber];
+    // const winner = calculateWinner(current.squares);
+    // const humanTurn = this.state.humanTurn;
+    // if (winner) {
+    //   status = 'Winner: ' + winner;
+    // } else {
+    //   if (humanTurn===null) {
+    //     choose = this.pickStart();
+    //   } else {
+    //     if (humanTurn===false) {
+
+    //       this.nextTurn(current)
+    //     }
+    //     status = 'Squishy: ' + this.state.human
+    //     status2 = 'Robot: ' + this.state.ai
+    //   }
+    // }
    
     return (
       <div className="game">
         <div className="game-board">
           <Board
             squares={current.squares}
-            onClick={(i) => this.handleClick(i)}
+            // onClick={(i) => this.handleClick(i)}
+            onClick={this.handleClick.bind(this)}
             humanTurn={this.state.humanTurn}/>
         </div>
         <div className="game-info">

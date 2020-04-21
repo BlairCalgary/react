@@ -59,11 +59,18 @@ class App extends Component {
     })
   }
 
-  render() {
+  activeApp() {
     const appDisplay =
-      (this.state.isActive==='tictactoe' ?
-        <Tictactoe /> :
-        <img src={this.state.isActiveLogo} className="App-logo" alt="logo" />)
+    (this.state.isActive==='tictactoe' ?
+      <Tictactoe /> :
+      <img src={this.state.isActiveLogo}
+        className="App-logo" alt="logo"
+      />)
+    return appDisplay
+  }
+
+  render() {
+    const appDisplay = this.activeApp();
     return (
       <div className="App">
           <div className="Om-header">
