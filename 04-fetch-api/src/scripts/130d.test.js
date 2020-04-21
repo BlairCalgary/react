@@ -241,3 +241,23 @@ test('test capitals class', async () => {
     capitals.addCapital(data);
     expect(capitals.capitals[0].name).toBe('Calgary');
 });
+
+// Testing competency 130E
+// when myFav = myCity, both variables point to same reference. When one changes, they both change.
+test('testing 130e', () => {
+    const data = {
+        "key": "1",
+        "name": "Budapest",
+        "latitude": "47",
+        "longitude": "20",
+        "population": "10000"
+    };
+    const myCity = new City(data);
+    expect(myCity.name).toBe("Budapest");
+    const myFav = myCity;
+    expect(myCity.population).toBe("10000");
+    expect(myFav.population).toBe("10000");
+    myFav.movedIn(1000);
+    expect(myCity.population).toBe("11000");
+    expect(myFav.population).toBe("11000");
+});
